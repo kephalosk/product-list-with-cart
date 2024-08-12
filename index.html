@@ -1,74 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+        <title>kephalosk | Product List With Chart</title>
+        <style>
+            .attribution {
+                font-size: 11px;
+                text-align: center;
+            }
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Product list with cart</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
-
-  Desserts
-
-  Waffle with Berries
-  Waffle
-  6.50
-  Add to Cart
-
-  Vanilla Bean Crème Brûlée
-  Crème Brûlée
-  7.00
-  Add to Cart
-
-  Macaron Mix of Five
-  Macaron
-  8.00
-  Add to Cart
-
-  Classic Tiramisu
-  Tiramisu
-  5.50
-  Add to Cart
-
-  Pistachio Baklava
-  Baklava
-  4.00
-  Add to Cart
-
-  Lemon Meringue Pie
-  Pie
-  5.00
-  Add to Cart
-
-  Red Velvet Cake
-  Cake
-  4.50
-  Add to Cart
-
-  Salted Caramel Brownie
-  Brownie
-  4.50
-  Add to Cart
-
-  Vanilla Panna Cotta
-  Panna Cotta
-  6.50
-  Add to Cart
-
-  Your Cart (<!-- Quantity -->)
-  Your added items will appear here
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+            .attribution a {
+                color: hsl(228, 45%, 44%);
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <section class="desserts">
+                <h1>Desserts</h1>
+                <div class="dessertsGrid">
+                    <div class="dessertsGridRow1">
+                        <div class="dessertsGridRow1Left dessertsGridItem">
+                            <img src="assets/images/image-waffle-desktop.jpg" alt="image of waffles">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Waffle</label>
+                                <h2>Waffle with Berries</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">6.50</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dessertsGridRow1Middle">
+                            <img src="assets/images/image-creme-brulee-desktop.jpg" alt="image of creme brulee">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Crème Brûlée</label>
+                                <h2>Vanilla Bean Crème Brûlée</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">7.00</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dessertsGridRow1Right">
+                            <img src="assets/images/image-macaron-desktop.jpg" alt="image of macaron">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Macaron</label>
+                                <h2>Macaron Mix of Five</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">8.00</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dessertsGridRow2">
+                        <div class="dessertsGridRow2Left">
+                            <img src="assets/images/image-tiramisu-desktop.jpg" alt="image of tiramisu">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Tiramisu</label>
+                                <h2>Classic Tiramisu</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">5.50</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dessertsGridRow2Middle">
+                            <img src="assets/images/image-baklava-desktop.jpg" alt="image of baklava">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Baklava</label>
+                                <h2>Pistachio Baklava</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">4.00</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dessertsGridRow2Right">
+                            <img src="assets/images/image-meringue-desktop.jpg" alt="image of waffles">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Pie</label>
+                                <h2>Lemon Meringue Pie</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">5.00</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dessertsGridRow3">
+                        <div class="dessertsGridRow3Left">
+                            <img src="assets/images/image-cake-desktop.jpg" alt="image of waffles">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Cake</label>
+                                <h2>Red Velvet Cake</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">4.50</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dessertsGridRow3Middle">
+                            <img src="assets/images/image-brownie-desktop.jpg" alt="image of waffles">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Brownie</label>
+                                <h2>Salted Caramel Brownie</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">4.50</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dessertsGridRow3Right">
+                            <img src="assets/images/image-panna-cotta-desktop.jpg" alt="image of waffles">
+                            <div >
+                                <button class="dessertButton">
+                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
+                                    Add to Cart
+                                </button>
+                                <label class="category">Panna Cotta</label>
+                                <h2>Vanilla Panna Cotta</h2>
+                                <div class="priceBox">
+                                    <label class="Currency">$</label>
+                                    <label class="price">6.50</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="cart">
+                <div class="cartBox">
+                    <label>Your Cart (<span class="itemsAmountTotal">0</span>)</label>
+                    <div class="cartBoxEmpty">
+                        <img src="assets/images/illustration-empty-cart.svg">
+                        <p>Your added items will appear here</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="attribution">
+            Challenge by <a href="https://www.frontendmentor.io&ref/challenge">Frontend Mentor</a>.
+            Coded by <a href="#">kephalosk</a>.
+        </footer>
+    </body>
 </html>
