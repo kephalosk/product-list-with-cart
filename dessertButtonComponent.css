@@ -1,0 +1,18 @@
+.dessertButton {
+    align-items: center;
+    background-color: hsl(0, 0%, 100%);
+    border: 1px solid hsl(14, 65%, 9%);
+    border-radius: 50px;
+    color: hsl(14, 65%, 9%);
+    cursor: pointer;
+    display: flex;
+    font-size: 13px;
+    font-weight: bold;
+    left: calc(50% - 72px);
+    padding: 10px 20px;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    width: 144px;
+    white-space: nowrap;
+}

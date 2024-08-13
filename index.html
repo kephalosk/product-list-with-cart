@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+        <link rel="stylesheet" href="dessertButtonSelectedComponent.css">
+        <link rel="stylesheet" href="dessertButtonComponent.css">
         <title>kephalosk | Product List With Chart</title>
         <style>
             @font-face {
@@ -68,23 +70,6 @@
                 margin-top: 40px;
             }
 
-            .dessertButton {
-                align-items: center;
-                border: 1px solid hsl(14, 65%, 9%);
-                border-radius: 50px;
-                color: hsl(14, 65%, 9%);
-                cursor: pointer;
-                display: flex;
-                font-size: 13px;
-                font-weight: bold;
-                left: calc(50% - 71px);
-                padding: 10px 20px;
-                position: absolute;
-                top: 0;
-                transform: translateY(-50%);
-                white-space: nowrap;
-            }
-
             .dessertButton img {
                 margin-right: 8px;
             }
@@ -120,6 +105,10 @@
             .dessertsGridRow img{
                 border-radius: 10px;
                 max-width: 250px;
+            }
+
+            .hidden {
+                display: none;
             }
 
             .priceBox {
@@ -171,6 +160,72 @@
                 color: hsl(14, 65%, 9%);
             }
         </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
+                dessertButtons.forEach(button => {
+                    button.addEventListener('click', addItem);
+                    button.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter' || event.key === ' '){
+                            addItem.call(this);
+                        }
+                    });
+
+                    function addItem() {
+                        console.log('click');
+                        const parentElement = this.parentElement;
+                        console.log(parentElement);
+                        const dessertButton = this.firstElementChild;
+                        const dessertButtonSelected = parentElement.querySelector('.dessertButtonSelectedComponent');
+                        console.log(dessertButtonSelected);
+                        console.log(dessertButtonSelected.classList);
+                        dessertButton.classList.add('hidden');
+                        console.log(this.classList);
+
+                        dessertButtonSelected.classList.remove('hidden');
+                    }
+                })
+            });
+
+            window.onload = start;
+
+            function start() {
+                loadComponents();
+                addListener();
+            }
+
+            function addListener() {
+
+            }
+
+            function loadComponents() {
+                loadDessertButton();
+                loadDessertButtonSelected();
+            }
+
+            function loadDessertButton() {
+                fetch('dessertButtonComponent.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
+                        dessertButtons.forEach(button => {
+                           button.innerHTML = data;
+                        });
+                    });
+            }
+
+            function loadDessertButtonSelected() {
+                fetch('dessertButtonSelectedComponent.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        const dessertButtonsSelected = document.querySelectorAll('.dessertButtonSelectedComponent');
+                        dessertButtonsSelected.forEach(button => {
+                            button.innerHTML = data;
+                            button.classList.add('hidden');
+                        });
+                    });
+            }
+        </script>
     </head>
     <body>
         <main>
@@ -181,10 +236,8 @@
                         <div class="dessertsGridRow1Left dessertsGridItem">
                             <img src="assets/images/image-waffle-desktop.jpg" alt="image of waffles">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Waffle</label>
                                 <h2>Waffle with Berries</h2>
                                 <div class="priceBox">
@@ -196,10 +249,8 @@
                         <div class="dessertsGridRow1Middle dessertsGridItem">
                             <img src="assets/images/image-creme-brulee-desktop.jpg" alt="image of creme brulee">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Crème Brûlée</label>
                                 <h2>Vanilla Bean Crème Brûlée</h2>
                                 <div class="priceBox">
@@ -211,10 +262,8 @@
                         <div class="dessertsGridRow1Right dessertsGridItem">
                             <img src="assets/images/image-macaron-desktop.jpg" alt="image of macaron">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Macaron</label>
                                 <h2>Macaron Mix of Five</h2>
                                 <div class="priceBox">
@@ -228,10 +277,8 @@
                         <div class="dessertsGridRow2Left dessertsGridItem">
                             <img src="assets/images/image-tiramisu-desktop.jpg" alt="image of tiramisu">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Tiramisu</label>
                                 <h2>Classic Tiramisu</h2>
                                 <div class="priceBox">
@@ -243,10 +290,8 @@
                         <div class="dessertsGridRow2Middle dessertsGridItem">
                             <img src="assets/images/image-baklava-desktop.jpg" alt="image of baklava">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Baklava</label>
                                 <h2>Pistachio Baklava</h2>
                                 <div class="priceBox">
@@ -258,10 +303,8 @@
                         <div class="dessertsGridRow2Right dessertsGridItem">
                             <img src="assets/images/image-meringue-desktop.jpg" alt="image of waffles">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Pie</label>
                                 <h2>Lemon Meringue Pie</h2>
                                 <div class="priceBox">
@@ -275,10 +318,8 @@
                         <div class="dessertsGridRow3Left dessertsGridItem">
                             <img src="assets/images/image-cake-desktop.jpg" alt="image of waffles">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Cake</label>
                                 <h2>Red Velvet Cake</h2>
                                 <div class="priceBox">
@@ -290,10 +331,8 @@
                         <div class="dessertsGridRow3Middle dessertsGridItem">
                             <img src="assets/images/image-brownie-desktop.jpg" alt="image of waffles">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Brownie</label>
                                 <h2>Salted Caramel Brownie</h2>
                                 <div class="priceBox">
@@ -305,10 +344,8 @@
                         <div class="dessertsGridRow3Right dessertsGridItem">
                             <img src="assets/images/image-panna-cotta-desktop.jpg" alt="image of waffles">
                             <div class="dessertContent">
-                                <button class="dessertButton">
-                                    <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
-                                    Add to Cart
-                                </button>
+                                <div class="dessertButtonComponent"></div>
+                                <div class="dessertButtonSelectedComponent"></div>
                                 <label class="category">Panna Cotta</label>
                                 <h2>Vanilla Panna Cotta</h2>
                                 <div class="priceBox">

@@ -1,0 +1,52 @@
+.dessertButtonSelected {
+    align-items: center;
+    background-color: hsl(14, 86%, 42%);
+    border: 1px solid hsl(14, 86%, 42%);
+    border-radius: 50px;
+    color: hsl(14, 65%, 9%);
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: bold;
+    height: 42px;
+    left: calc(50% - 72px);
+    padding: 10px 12px;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    width: 144px;
+    white-space: nowrap;
+}
+
+.dessertButtonSelectedLabel {
+    color: hsl(0, 0%, 100%);
+}
+
+.dessertButtonSelectedIcon {
+    align-items: center;
+    border-radius: 50px;
+    border: 1px solid hsl(0, 0%, 100%);
+    cursor: pointer;
+    display: flex;
+    padding: 7px 3px;
+}
+
+.dessertButtonSelectedIcon:hover {
+    background-color: white;
+}
+
+.dessertButtonSelectedIcon:hover svg {
+    color: hsl(14, 86%, 42%);
+}
+
+.dessertButtonSelectedIconMinus {
+    padding: 7px 3px;
+}
+
+.dessertButtonSelectedIconPlus {
+    padding: 3px 3px;
+}
+
+.dessertButtonSelectedIconSVG {
+    color: hsl(0, 0%, 100%);
+}
