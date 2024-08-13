@@ -6,6 +6,20 @@
         <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
         <title>kephalosk | Product List With Chart</title>
         <style>
+            @font-face {
+                font-family: 'Red Hat Text';
+                src: url('assets/fonts/RedHatText-VariableFont_wght.ttf') format('truetype');
+                font-weight: 400 700;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'Red Hat Text';
+                src: url('assets/fonts/RedHatText-Italic-VariableFont_wght.ttf') format('truetype');
+                font-weight: 400 700;
+                font-style: italic;
+            }
+
             .attribution {
                 font-size: 11px;
                 text-align: center;
@@ -14,6 +28,148 @@
             .attribution a {
                 color: hsl(228, 45%, 44%);
             }
+
+            .cartBox {
+                background-color: hsl(0, 0%, 100%);
+                border-radius: 10px;
+                padding: 24px;
+                width: 384px;
+            }
+
+            .cartBox label{
+                color: hsl(14, 86%, 42%);
+                display: block;
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 4px;
+            }
+
+            .cartBoxEmpty {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cartBoxEmpty p {
+                color: hsl(12, 20%, 44%);
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .cartBoxEmptyImage {
+                margin-top: 40px;
+                width: 122px;
+            }
+
+            .category {
+                color: hsl(12, 20%, 44%);
+                display: block;
+                font-size: 14px;
+                margin-top: 40px;
+            }
+
+            .dessertButton {
+                align-items: center;
+                border: 1px solid hsl(14, 65%, 9%);
+                border-radius: 50px;
+                color: hsl(14, 65%, 9%);
+                cursor: pointer;
+                display: flex;
+                font-size: 13px;
+                font-weight: bold;
+                left: calc(50% - 71px);
+                padding: 10px 20px;
+                position: absolute;
+                top: 0;
+                transform: translateY(-50%);
+                white-space: nowrap;
+            }
+
+            .dessertButton img {
+                margin-right: 8px;
+            }
+
+            .dessertContent {
+                position: relative;
+            }
+
+            .desserts {
+                display: grid;
+                grid-template-rows: auto 1fr;
+            }
+
+            .dessertsGrid {
+                display: grid;
+                grid-template-rows: 1fr 1fr 1fr;
+            }
+
+            .dessertsGridItem {
+                display: flex;
+                flex-direction: column;
+                max-width: 250px;
+                padding: 12px;
+            }
+
+            .dessertsGridRow {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                height: 100%;
+                max-width: 822px;
+            }
+
+            .dessertsGridRow img{
+                border-radius: 10px;
+                max-width: 250px;
+            }
+
+            .priceBox {
+                color: hsl(14, 86%, 42%);
+                font-weight: bold;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                align-items: center;
+                background-color: hsl(20, 50%, 98%);
+                display: flex;
+                flex-direction: column;
+                font-family: 'Red Hat Text', sans-serif;
+                justify-content: center;
+                padding: 90px 100px 0 100px;
+            }
+
+            h1 {
+                color: hsl(14, 65%, 9%);
+                font-size: 40px;
+                letter-spacing: 1px;
+                margin-top: 0;
+            }
+
+            h2 {
+                color: hsl(12, 20%, 44%);
+                font-size: 15px;
+                margin: 5px 0;
+            }
+
+            main {
+                display: grid;
+                grid-template-columns: auto auto;
+                width: 100%;
+            }
+
+            .colors {
+                color: hsl(14, 86%, 42%);
+                color: hsl(159, 69%, 38%);
+                color: hsl(20, 50%, 98%);
+                color: hsl(13, 31%, 94%);
+                color: hsl(14, 25%, 72%);
+                color: hsl(7, 20%, 60%);
+                color: hsl(12, 20%, 44%);
+                color: hsl(14, 65%, 9%);
+            }
         </style>
     </head>
     <body>
@@ -21,10 +177,10 @@
             <section class="desserts">
                 <h1>Desserts</h1>
                 <div class="dessertsGrid">
-                    <div class="dessertsGridRow1">
+                    <div class="dessertsGridRow dessertsGridRow1">
                         <div class="dessertsGridRow1Left dessertsGridItem">
                             <img src="assets/images/image-waffle-desktop.jpg" alt="image of waffles">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -37,9 +193,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="dessertsGridRow1Middle">
+                        <div class="dessertsGridRow1Middle dessertsGridItem">
                             <img src="assets/images/image-creme-brulee-desktop.jpg" alt="image of creme brulee">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -52,9 +208,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="dessertsGridRow1Right">
+                        <div class="dessertsGridRow1Right dessertsGridItem">
                             <img src="assets/images/image-macaron-desktop.jpg" alt="image of macaron">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -68,10 +224,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dessertsGridRow2">
-                        <div class="dessertsGridRow2Left">
+                    <div class="dessertsGridRow dessertsGridRow2">
+                        <div class="dessertsGridRow2Left dessertsGridItem">
                             <img src="assets/images/image-tiramisu-desktop.jpg" alt="image of tiramisu">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -84,9 +240,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="dessertsGridRow2Middle">
+                        <div class="dessertsGridRow2Middle dessertsGridItem">
                             <img src="assets/images/image-baklava-desktop.jpg" alt="image of baklava">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -99,9 +255,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="dessertsGridRow2Right">
+                        <div class="dessertsGridRow2Right dessertsGridItem">
                             <img src="assets/images/image-meringue-desktop.jpg" alt="image of waffles">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -115,10 +271,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dessertsGridRow3">
-                        <div class="dessertsGridRow3Left">
+                    <div class="dessertsGridRow dessertsGridRow3">
+                        <div class="dessertsGridRow3Left dessertsGridItem">
                             <img src="assets/images/image-cake-desktop.jpg" alt="image of waffles">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -131,9 +287,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="dessertsGridRow3Middle">
+                        <div class="dessertsGridRow3Middle dessertsGridItem">
                             <img src="assets/images/image-brownie-desktop.jpg" alt="image of waffles">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -146,9 +302,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="dessertsGridRow3Right">
+                        <div class="dessertsGridRow3Right dessertsGridItem">
                             <img src="assets/images/image-panna-cotta-desktop.jpg" alt="image of waffles">
-                            <div >
+                            <div class="dessertContent">
                                 <button class="dessertButton">
                                     <img src="assets/images/icon-add-to-cart.svg" alt="cart icon">
                                     Add to Cart
@@ -168,7 +324,7 @@
                 <div class="cartBox">
                     <label>Your Cart (<span class="itemsAmountTotal">0</span>)</label>
                     <div class="cartBoxEmpty">
-                        <img src="assets/images/illustration-empty-cart.svg">
+                        <img class="cartBoxEmptyImage" src="assets/images/illustration-empty-cart.svg" alt="image of cake">
                         <p>Your added items will appear here</p>
                     </div>
                 </div>
