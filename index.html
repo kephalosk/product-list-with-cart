@@ -375,8 +375,6 @@
                                 const dessertButtonSelected = dessertContent.querySelector('.dessertButtonSelectedComponent');
 
                                 buttonLabel.textContent = '0';
-                                console.log(dessertButton.classList);
-                                console.log(dessertButtonSelected.classList);
                                 dessertButton.classList.remove('hidden');
                                 dessertButtonSelected.classList.add('hidden');
 
@@ -392,10 +390,12 @@
                 const dessertContent = dessertButtonSelected.parentElement;
                 const name = dessertContent.querySelector('h2').textContent;
                 let totalSum = 0;
+                let amountOfAllItems = 0;
 
                 const cartBoxSelectedListItemContents = document.querySelectorAll('.cartBoxSelectedListItemContent');
                 cartBoxSelectedListItemContents.forEach(item => {
                     const cartBoxSelectedListItemContentName = item.querySelector('.cartBoxSelectedListItemContentName');
+
                     if(cartBoxSelectedListItemContentName.textContent === name) {
                         const price = parseFloat(item.querySelector('.price').textContent);
                         const sum = newAmount * price;
@@ -413,7 +413,13 @@
                         const sumFloat = parseFloat(sumString.replace('$',''));
                         totalSum = totalSum + sumFloat;
                     }
+
+                    const cartBoxSelectedListItemContentQuantityAmount = item.querySelector('.cartBoxSelectedListItemContentQuantityAmount');
+                    amountOfAllItems = amountOfAllItems + parseInt(cartBoxSelectedListItemContentQuantityAmount.textContent,10);
                 });
+
+                const itemsAmountTotal = document.querySelector('.itemsAmountTotal');
+                itemsAmountTotal.textContent = amountOfAllItems;
 
                 const cartBoxEmpty = document.querySelector('.cartBoxEmpty');
                 const cartBoxSelected = document.querySelector('.cartBoxSelected');
