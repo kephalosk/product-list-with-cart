@@ -352,33 +352,26 @@
             }
 
             function updateCart(dessertButton, dessertButtonSelected) {
-                //TODO
-                //updateSum
-                //updateCardList
-                // console.log(dessertButton);
                 const newAmount = dessertButtonSelected.querySelector('.dessertButtonSelectedLabel').textContent;
                 const dessertContent = dessertButtonSelected.parentElement;
                 const name = dessertContent.querySelector('h2').textContent;
                 let totalSum = 0;
-                // console.log(dessertContent);
 
                 const cartBoxSelectedListItemContents = document.querySelectorAll('.cartBoxSelectedListItemContent');
                 cartBoxSelectedListItemContents.forEach(item => {
                     const cartBoxSelectedListItemContentName = item.querySelector('.cartBoxSelectedListItemContentName');
                     if(cartBoxSelectedListItemContentName.textContent === name) {
-                        item.querySelector('.cartBoxSelectedListItemContentQuantityAmount').textContent = newAmount + 'x';
                         const price = parseFloat(item.querySelector('.price').textContent);
                         const sum = newAmount * price;
+
+                        item.querySelector('.cartBoxSelectedListItemContentQuantityAmount').textContent = newAmount + 'x';
                         item.querySelector('.cartBoxSelectedListItemContentQuantitySum').textContent = "$" + parseFloat(sum.toString()).toFixed(2).toString();
+
                         totalSum = totalSum + sum;
 
                         const listItem = item.parentElement;
                         const section = listItem.parentElement;
-                        if (parseInt(newAmount) === 0){
-                            section.classList.add('hidden');
-                        } else {
-                            section.classList.remove('hidden');
-                        }
+                        parseInt(newAmount) === 0 ? section.classList.add('hidden') : section.classList.remove('hidden');
                     } else {
                         const sumString = item.querySelector('.cartBoxSelectedListItemContentQuantitySum').textContent;
                         const sumFloat = parseFloat(sumString.replace('$',''));
@@ -386,12 +379,13 @@
                     }
                 });
 
-                const cartBoxSelected = document.querySelector('.cartBoxSelected')
+                const cartBoxEmpty = document.querySelector('.cartBoxEmpty');
+                const cartBoxSelected = document.querySelector('.cartBoxSelected');
                 if (totalSum === 0){
-                    document.querySelector('.cartBoxEmpty').classList.remove('hidden');
+                    cartBoxEmpty.classList.remove('hidden');
                     cartBoxSelected.classList.add('hidden');
                 } else if (cartBoxSelected.classList.contains('hidden')) {
-                    document.querySelector('.cartBoxEmpty').classList.add('hidden');
+                    cartBoxEmpty.classList.add('hidden');
                     cartBoxSelected.classList.remove('hidden');
                 }
 
@@ -422,7 +416,6 @@
                     .then(data => {
                         const dessertButtonsSelected = document.querySelectorAll('.dessertButtonSelectedComponent');
                         dessertButtonsSelected.forEach(button => {
-                            // console.log(data);
                             button.innerHTML = data;
                             button.classList.add('hidden');
                         });
@@ -437,38 +430,39 @@
                         const cartBoxSelectedListItems = document.querySelector('.cartBoxSelectedListItems');
                         let listItemsHtml = '';
                         let totalSum = 0;
+
                         dessertsGridItems.forEach(item => {
                             const newItem = document.createRange().createContextualFragment(data);
-                            // newItem
                             const name = item.querySelector('h2').textContent;
-                            newItem.querySelector('.cartBoxSelectedListItemContentName').textContent = name;
-                            // console.log(name);
                             const amount = parseInt(item.querySelector('.dessertButtonSelectedLabel').textContent,10);
-                            newItem.querySelector('.cartBoxSelectedListItemContentQuantityAmount').textContent = amount + 'x';
                             const price = parseFloat(item.querySelector('.price').textContent);
-                            newItem.querySelector('.price').textContent = parseFloat(price.toString()).toFixed(2).toString();
                             const sum = amount * price;
+
+                            newItem.querySelector('.cartBoxSelectedListItemContentName').textContent = name;
+                            newItem.querySelector('.cartBoxSelectedListItemContentQuantityAmount').textContent = amount + 'x';
+                            newItem.querySelector('.price').textContent = parseFloat(price.toString()).toFixed(2).toString();
                             newItem.querySelector('.cartBoxSelectedListItemContentQuantitySum').textContent = "$" + parseFloat(sum.toString()).toFixed(2).toString();
+
                             totalSum = totalSum + sum;
-                            // console.log(data);
-                            // button.innerHTML = data;
-                            // item.classList.add('hidden');
+                            listItemsHtml = listItemsHtml + newItem.firstElementChild.outerHTML;
+
                             if(amount === 0){
                                 newItem.querySelector('section').classList.add('hidden');
                             }
-                            listItemsHtml = listItemsHtml + newItem.firstElementChild.outerHTML;
                         });
                         cartBoxSelectedListItems.innerHTML = listItemsHtml;
+
                         const cartBoxSelectedTotalPrice = document.querySelector('.cartBoxSelectedTotalPrice');
                         cartBoxSelectedTotalPrice.textContent = '$' + parseFloat(totalSum).toFixed(2);
+
+                        const cartBoxEmpty = document.querySelector('.cartBoxEmpty')
+                        const cartBoxSelected = document.querySelector('.cartBoxSelected');
                         if(totalSum === 0) {
-                            const cartBoxEmpty = document.querySelector('.cartBoxEmpty')
-                            // console.log(cartBoxEmpty);
                             cartBoxEmpty.classList.remove('hidden');
-                            document.querySelector('.cartBoxSelected').classList.add('hidden');
+                            cartBoxSelected.classList.add('hidden');
                         } else {
-                            document.querySelector('.cartBoxEmpty').classList.add('hidden');
-                            document.querySelector('.cartBoxSelected').classList.remove('hidden');
+                            cartBoxEmpty.classList.add('hidden');
+                            cartBoxSelected.classList.remove('hidden');
                         }
                     });
             }
