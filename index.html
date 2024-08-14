@@ -278,17 +278,17 @@
             document.addEventListener('DOMContentLoaded', async () => {
                 await loadComponents();
                 addDessertButtonEventListener();
+                addRemoveButtonEventListener();
             });
 
             function addDessertButtonEventListener() {
                 const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
-                dessertButtons.forEach(button => {
-                    const parentElement = button.parentElement;
-                    const dessertButton = button.firstElementChild;
+                dessertButtons.forEach(dessertButton => {
+                    const parentElement = dessertButton.parentElement;
                     const dessertButtonSelected = parentElement.querySelector('.dessertButtonSelectedComponent');
 
-                    button.addEventListener('click', addItem);
-                    button.addEventListener('keydown', (event) => {
+                    dessertButton.addEventListener('click', addItem);
+                    dessertButton.addEventListener('keydown', (event) => {
                         if (event.key === 'Enter' || event.key === ' '){
                             addItem.call(this);
                         }
@@ -349,6 +349,42 @@
                     buttonLabel.textContent = currentValue + 1;
                     updateCart(dessertButton, dessertButtonSelected);
                 }
+            }
+
+            function addRemoveButtonEventListener() {
+                const cartBoxSelectedListItems = document.querySelectorAll('.cartBoxSelectedListItem');
+                cartBoxSelectedListItems.forEach(item => {
+                    const buttonAbort = item.querySelector('.cartBoxSelectedListItemRemove');
+                    buttonAbort.addEventListener('click', removeItem);
+                    buttonAbort.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            removeItem.call(this);
+                        }
+                    })
+
+                    function removeItem() {
+                        const cartName = item.querySelector('.cartBoxSelectedListItemContentName').textContent;
+                        const dessertContents = document.querySelectorAll('.dessertContent');
+
+                        dessertContents.forEach(dessertContent => {
+                            const dessertName = dessertContent.querySelector('h2').textContent;
+
+                            if(dessertName === cartName) {
+                                const buttonLabel = dessertContent.querySelector('.dessertButtonSelectedLabel');
+                                const dessertButton = dessertContent.querySelector('.dessertButtonComponent');
+                                const dessertButtonSelected = dessertContent.querySelector('.dessertButtonSelectedComponent');
+
+                                buttonLabel.textContent = '0';
+                                console.log(dessertButton.classList);
+                                console.log(dessertButtonSelected.classList);
+                                dessertButton.classList.remove('hidden');
+                                dessertButtonSelected.classList.add('hidden');
+
+                                updateCart(dessertButton, dessertButtonSelected);
+                            }
+                        });
+                    }
+                });
             }
 
             function updateCart(dessertButton, dessertButtonSelected) {
