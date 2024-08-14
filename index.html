@@ -161,9 +161,18 @@
             }
         </style>
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('DOMContentLoaded', async () => {
+                await loadComponents();
+                addDessertButtonEventListener();
+            });
+
+            function addDessertButtonEventListener() {
                 const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
                 dessertButtons.forEach(button => {
+                    const parentElement = button.parentElement;
+                    const dessertButton = button.firstElementChild;
+                    const dessertButtonSelected = parentElement.querySelector('.dessertButtonSelectedComponent');
+
                     button.addEventListener('click', addItem);
                     button.addEventListener('keydown', (event) => {
                         if (event.key === 'Enter' || event.key === ' '){
@@ -172,39 +181,56 @@
                     });
 
                     function addItem() {
-                        console.log('click');
-                        const parentElement = this.parentElement;
-                        console.log(parentElement);
-                        const dessertButton = this.firstElementChild;
-                        const dessertButtonSelected = parentElement.querySelector('.dessertButtonSelectedComponent');
-                        console.log(dessertButtonSelected);
-                        console.log(dessertButtonSelected.classList);
                         dessertButton.classList.add('hidden');
-                        console.log(this.classList);
-
                         dessertButtonSelected.classList.remove('hidden');
                     }
+
+                    addDessertButtonSelectedMinusEventListener(dessertButton, dessertButtonSelected)
                 })
-            });
-
-            window.onload = start;
-
-            function start() {
-                loadComponents();
-                addListener();
             }
 
-            function addListener() {
+            function addDessertButtonSelectedMinusEventListener(dessertButton, dessertButtonSelected) {
+                console.log(dessertButton);
+                console.log(dessertButtonSelected);
+                // const iconMinus = dessertButtonSelected
+
+                // const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
+                // console.log(dessertButtons)
+                // const dessertButtonSelectedIconMinus = document.querySelectorAll('.dessertButtonSelectedIconMinus');
+                // console.log(dessertButtonSelectedIconMinus);
+                // dessertButtonSelectedIconMinus.forEach(button => {
+                //     button.addEventListener('click', decrementItem);
+                //     button.addEventListener('keydown', (event) => {
+                //         if (event.key === 'Enter' || event.key === ' '){
+                //             decrementItem.call(this);
+                //         }
+                //     });
+                //
+                //
+                //     function decrementItem() {
+                //         const parentElement = this.parentElement;
+                //         const itemValue = parentElement.querySelector('.dessertButtonSelectedLabel');
+                //         console.log(itemValue.textContent);
+                //
+                //         // const dessertButton = this.firstElementChild;
+                //         // const dessertButtonSelected = parentElement.querySelector('.dessertButtonSelectedComponent');
+                //         // dessertButton.classList.add('hidden');
+                //         // dessertButtonSelected.classList.remove('hidden');
+                //     }
+                // })
+            }
+
+            function addDessertButtonSelectedPlusEventListener() {
 
             }
 
-            function loadComponents() {
-                loadDessertButton();
-                loadDessertButtonSelected();
+            async function loadComponents() {
+                await loadDessertButton();
+                await loadDessertButtonSelected();
             }
 
-            function loadDessertButton() {
-                fetch('dessertButtonComponent.html')
+            async function loadDessertButton() {
+                await fetch('dessertButtonComponent.html')
                     .then(response => response.text())
                     .then(data => {
                         const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
@@ -214,8 +240,8 @@
                     });
             }
 
-            function loadDessertButtonSelected() {
-                fetch('dessertButtonSelectedComponent.html')
+            async function loadDessertButtonSelected() {
+                await fetch('dessertButtonSelectedComponent.html')
                     .then(response => response.text())
                     .then(data => {
                         const dessertButtonsSelected = document.querySelectorAll('.dessertButtonSelectedComponent');
