@@ -1,0 +1,49 @@
+.cartBoxSelectedListItem {
+    align-items: center;
+    display: flex;
+}
+
+.cartBoxSelectedListItemContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.cartBoxSelectedListItemContent {
+    flex-grow: 1;
+}
+
+.cartBoxSelectedListItemContentName {
+    color: hsl(14, 65%, 9%);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cartBoxSelectedListItemContentQuantity {
+    color: hsl(12, 20%, 44%);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.cartBoxSelectedListItemContentQuantityAmount {
+    color: hsl(14, 86%, 42%);
+    font-weight: 500;
+    margin-right: 12px;
+}
+
+.cartBoxSelectedListItemContentQuantitySum {
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.cartBoxSelectedListItemRemove {
+    border: 1px solid hsl(12, 20%, 44%);
+    border-radius: 50px;
+    color: hsl(12, 20%, 44%);
+    cursor: pointer;
+    padding: 0 6px;
+}
+
+.cartBoxSelectedListItemRemove:hover {
+    border: 1px solid hsl(14, 65%, 9%);
+    color: hsl(14, 65%, 9%);
+}
