@@ -1,4 +1,6 @@
-function addButtonEventListener() {
+import {updateCart} from "./updateCart.js";
+
+export function addButtonEventListener() {
     const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
 
     dessertButtons.forEach(dessertButton => {
@@ -78,7 +80,7 @@ function increment(dessertButton, dessertButtonSelected) {
     updateCart(dessertButton, dessertButtonSelected);
 }
 
-function addRemoveButtonEventListener() {
+export function addRemoveButtonEventListener() {
     const cartBoxSelectedListItems = document.querySelectorAll('.cartBoxSelectedListItem');
     cartBoxSelectedListItems.forEach(item => {
         const buttonAbort = item.querySelector('.cartBoxSelectedListItemRemove');

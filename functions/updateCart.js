@@ -1,4 +1,4 @@
-function updateCart(dessertButton, dessertButtonSelected) {
+export function updateCart(dessertButton, dessertButtonSelected) {
     let totalSum = 0;
     let amountOfAllItems = 0;
 

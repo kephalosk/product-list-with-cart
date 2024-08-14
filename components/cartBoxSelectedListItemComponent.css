@@ -18,12 +18,6 @@
     font-weight: 600;
 }
 
-.cartBoxSelectedListItemContentQuantity {
-    color: hsl(12, 20%, 44%);
-    font-size: 14px;
-    margin-top: 5px;
-}
-
 .cartBoxSelectedListItemContentQuantityAmount {
     color: hsl(14, 86%, 42%);
     font-weight: 500;

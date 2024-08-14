@@ -1,0 +1,41 @@
+.confirmationListItem {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.confirmationListItemContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.confirmationListItemContentName {
+    color: hsl(14, 65%, 9%);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.confirmationListItemContentQuantity {
+    color: hsl(12, 20%, 44%);
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.confirmationListItemContentQuantityAmount {
+    color: hsl(14, 86%, 42%);
+    font-weight: 500;
+    margin-right: 12px;
+}
+
+.confirmationListItemContentQuantitySum {
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.confirmationListItemHr {
+    background-color: hsl(13, 31%, 90%);
+    border: 0;
+    height: 1px;
+    margin: 14px 0;
+}

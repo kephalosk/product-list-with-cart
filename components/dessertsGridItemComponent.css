@@ -1,0 +1,15 @@
+.category {
+    color: hsl(12, 20%, 44%);
+    display: block;
+    font-size: 14px;
+    margin-top: 40px;
+}
+
+.dessertContent {
+    position: relative;
+}
+
+.priceBox {
+    color: hsl(14, 86%, 42%);
+    font-weight: bold;
+}

@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-        <link rel="stylesheet" href="dessertButtonSelectedComponent.css">
-        <link rel="stylesheet" href="dessertButtonComponent.css">
-        <link rel="stylesheet" href="cartBoxSelectedListItemComponent.css">
+        <link rel="stylesheet" href="components/dessertButtonSelectedComponent.css">
+        <link rel="stylesheet" href="components/dessertButtonComponent.css">
+        <link rel="stylesheet" href="components/cartBoxSelectedListItemComponent.css">
         <title>kephalosk | Product List With Chart</title>
         <style>
             @font-face {
@@ -121,19 +121,87 @@
                 font-weight: 800;
             }
 
-            .category {
+            .confirmation {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                height: 100vh;
+                width: 100%;
+            }
+
+            .confirmation h2{
+                color: hsl(14, 65%, 9%);
+                font-size: 30px;
+            }
+
+            .confirmation p{
                 color: hsl(12, 20%, 44%);
-                display: block;
+                font-size: 12px;
+                margin-top: 8px;
+            }
+
+            .confirmationBox {
+                background-color: hsl(20, 50%, 98%);
+                border-radius: 10px;
+                left: 50%;
+                padding: 40px;
+                top: 50%;
+                width: 510px;
+            }
+
+            .confirmationBoxHeaderImage {
+                margin-bottom: 12px;
+                width: 40px;
+            }
+
+            .confirmationButton {
+                background-color: hsl(14, 86%, 42%);
+                border: 0;
+                border-radius: 50px;
+                color: hsl(0, 0%, 100%);
+                cursor: pointer;
+                font-weight: 600;
+                margin-top: 24px;
+                padding: 12px;
+                width: 100%;
+            }
+
+            .confirmationButton:hover {
+                background-color: hsl(14, 86%, 30%);
+            }
+
+            .confirmationList {
+                background-color: hsl(13, 31%, 96%);
+                border-radius: 10px;
+                margin-top: 24px;
+                padding: 24px;
+            }
+
+            .confirmationListItem img{
+                border-radius: 5px;
+                width: 40px;
+                margin-right: 12px;
+            }
+
+            .confirmationListTotal {
+                align-items: center;
+                color: hsl(14, 65%, 9%);
+                display: flex;
+                margin-top: 20px;
+            }
+
+            .confirmationListTotalName {
+                flex-grow: 1;
                 font-size: 14px;
-                margin-top: 40px;
+            }
+
+            .confirmationListTotalPrice {
+                font-size: 18px;
+                font-weight: 800;
             }
 
             .dessertButton img {
                 margin-right: 8px;
-            }
-
-            .dessertContent {
-                position: relative;
             }
 
             .desserts {
@@ -146,7 +214,7 @@
                 grid-template-rows: 1fr 1fr 1fr;
             }
 
-            .dessertsGridItem {
+            .dessertsGridItemComponent section{
                 display: flex;
                 flex-direction: column;
                 max-width: 250px;
@@ -169,9 +237,19 @@
                 display: none;
             }
 
-            .priceBox {
-                color: hsl(14, 86%, 42%);
-                font-weight: bold;
+            .windowConfirmation {
+                align-items: start;
+                background-color: hsl(0, 0%, 0%, 0.5);
+                display: flex;
+                height: 100%;
+                position: absolute;
+                width: 100%;
+            }
+
+            .windowPadding {
+                height: 100%;
+                width: 100%;
+                padding: 90px 7vw 0 7vw;
             }
 
             * {
@@ -185,7 +263,9 @@
                 flex-direction: column;
                 font-family: 'Red Hat Text', sans-serif;
                 justify-content: center;
-                padding: 90px 100px 0 100px;
+                margin: 0;
+                position: relative;
+                width: 100%;
             }
 
             h1 {
@@ -207,17 +287,6 @@
                 width: 100%;
             }
 
-            .colors {
-                color: hsl(14, 86%, 42%);
-                color: hsl(159, 69%, 38%);
-                color: hsl(20, 50%, 98%);
-                color: hsl(13, 31%, 94%);
-                color: hsl(14, 25%, 72%);
-                color: hsl(7, 20%, 60%);
-                color: hsl(12, 20%, 44%);
-                color: hsl(14, 65%, 9%);
-            }
-
             hr {
                 background-color: hsl(13, 31%, 94%);
                 border: 0;
@@ -225,250 +294,78 @@
                 margin: 14px 0;
             }
         </style>
-        <script src="addButtonEventListener.js"></script>
-        <script src="updateCart.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', async () => {
-                await loadComponents();
-                addButtonEventListener();
-                addRemoveButtonEventListener();
-            });
-
-
-
-            async function loadComponents() {
-                await loadDessertButton();
-                await loadDessertButtonSelected();
-                await loadCartItems();
-            }
-
-            async function loadDessertButton() {
-                await fetch('dessertButtonComponent.html?' + new Date().getTime())
-                    .then(response => response.text())
-                    .then(data => {
-                        const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
-                        dessertButtons.forEach(button => {
-                           button.innerHTML = data;
-                        });
-                    });
-            }
-
-            async function loadDessertButtonSelected() {
-                await fetch('dessertButtonSelectedComponent.html?' + new Date().getTime())
-                    .then(response => response.text())
-                    .then(data => {
-                        const dessertButtonsSelected = document.querySelectorAll('.dessertButtonSelectedComponent');
-                        dessertButtonsSelected.forEach(button => {
-                            button.innerHTML = data;
-                            button.classList.add('hidden');
-                        });
-                    });
-            }
-
-            async function loadCartItems() {
-                await fetch('cartBoxSelectedListItemComponent.html?' + new Date().getTime())
-                    .then(response => response.text())
-                    .then(data => {
-                        const dessertsGridItems = document.querySelectorAll('.dessertsGridItem');
-                        const cartBoxSelectedListItems = document.querySelector('.cartBoxSelectedListItems');
-                        let listItemsHtml = '';
-                        let totalSum = 0;
-
-                        dessertsGridItems.forEach(item => {
-                            const newItem = document.createRange().createContextualFragment(data);
-                            const name = item.querySelector('h2').textContent;
-                            const amount = parseInt(item.querySelector('.dessertButtonSelectedLabel').textContent,10);
-                            const price = parseFloat(item.querySelector('.price').textContent);
-                            const sum = amount * price;
-
-                            newItem.querySelector('.cartBoxSelectedListItemContentName').textContent = name;
-                            newItem.querySelector('.cartBoxSelectedListItemContentQuantityAmount').textContent = amount + 'x';
-                            newItem.querySelector('.price').textContent = parseFloat(price.toString()).toFixed(2).toString();
-                            newItem.querySelector('.cartBoxSelectedListItemContentQuantitySum').textContent = "$" + parseFloat(sum.toString()).toFixed(2).toString();
-
-                            totalSum = totalSum + sum;
-                            listItemsHtml = listItemsHtml + newItem.firstElementChild.outerHTML;
-
-                            if(amount === 0){
-                                newItem.querySelector('section').classList.add('hidden');
-                            }
-                        });
-                        cartBoxSelectedListItems.innerHTML = listItemsHtml;
-
-                        const cartBoxSelectedTotalPrice = document.querySelector('.cartBoxSelectedTotalPrice');
-                        cartBoxSelectedTotalPrice.textContent = '$' + parseFloat(totalSum).toFixed(2);
-
-                        const cartBoxEmpty = document.querySelector('.cartBoxEmpty')
-                        const cartBoxSelected = document.querySelector('.cartBoxSelected');
-                        if(totalSum === 0) {
-                            cartBoxEmpty.classList.remove('hidden');
-                            cartBoxSelected.classList.add('hidden');
-                        } else {
-                            cartBoxEmpty.classList.add('hidden');
-                            cartBoxSelected.classList.remove('hidden');
-                        }
-                    });
-            }
-        </script>
+        <script type="module" src="main.js"></script>
     </head>
     <body>
-        <main>
-            <section class="desserts">
-                <h1>Desserts</h1>
-                <div class="dessertsGrid">
-                    <div class="dessertsGridRow dessertsGridRow1">
-                        <div class="dessertsGridRow1Left dessertsGridItem">
-<!--                            <div class="dessertsGridItemComponent"></div>-->
-                            <img src="assets/images/image-waffle-desktop.jpg" alt="image of waffles">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Waffle</label>
-                                <h2>Waffle with Berries</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">6.50</label>
-                                </div>
-                            </div>
+        <div class="windowPadding">
+            <main>
+                <section class="desserts">
+                    <h1>Desserts</h1>
+                    <div class="dessertsGrid">
+                        <div class="dessertsGridRow dessertsGridRow1">
+                            <div class="dessertsGridItemComponent"></div>
+                            <div class="dessertsGridItemComponent"></div>
+                            <div class="dessertsGridItemComponent"></div>
                         </div>
-                        <div class="dessertsGridRow1Middle dessertsGridItem">
-                            <img src="assets/images/image-creme-brulee-desktop.jpg" alt="image of creme brulee">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Crème Brûlée</label>
-                                <h2>Vanilla Bean Crème Brûlée</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">7.00</label>
-                                </div>
-                            </div>
+                        <div class="dessertsGridRow dessertsGridRow2">
+                            <div class="dessertsGridItemComponent"></div>
+                            <div class="dessertsGridItemComponent"></div>
+                            <div class="dessertsGridItemComponent"></div>
                         </div>
-                        <div class="dessertsGridRow1Right dessertsGridItem">
-                            <img src="assets/images/image-macaron-desktop.jpg" alt="image of macaron">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Macaron</label>
-                                <h2>Macaron Mix of Five</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">8.00</label>
-                                </div>
-                            </div>
+                        <div class="dessertsGridRow dessertsGridRow3">
+                            <div class="dessertsGridItemComponent"></div>
+                            <div class="dessertsGridItemComponent"></div>
+                            <div class="dessertsGridItemComponent"></div>
                         </div>
                     </div>
-                    <div class="dessertsGridRow dessertsGridRow2">
-                        <div class="dessertsGridRow2Left dessertsGridItem">
-                            <img src="assets/images/image-tiramisu-desktop.jpg" alt="image of tiramisu">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Tiramisu</label>
-                                <h2>Classic Tiramisu</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">5.50</label>
-                                </div>
-                            </div>
+                </section>
+                <section class="cart">
+                    <div class="cartBox">
+                        <label class="cartBoxHeadline">Your Cart (<span class="itemsAmountTotal">0</span>)</label>
+                        <div class="cartBoxEmpty">
+                            <img class="cartBoxEmptyImage" src="assets/images/illustration-empty-cart.svg" alt="image of cake">
+                            <p>Your added items will appear here</p>
                         </div>
-                        <div class="dessertsGridRow2Middle dessertsGridItem">
-                            <img src="assets/images/image-baklava-desktop.jpg" alt="image of baklava">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Baklava</label>
-                                <h2>Pistachio Baklava</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">4.00</label>
-                                </div>
+                        <div class="cartBoxSelected hidden">
+                            <div class="cartBoxSelectedList">
+                                <div class="cartBoxSelectedListItems"></div>
                             </div>
-                        </div>
-                        <div class="dessertsGridRow2Right dessertsGridItem">
-                            <img src="assets/images/image-meringue-desktop.jpg" alt="image of waffles">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Pie</label>
-                                <h2>Lemon Meringue Pie</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">5.00</label>
-                                </div>
+                            <div class="cartBoxSelectedTotal">
+                                <label class="cartBoxSelectedTotalName">Order Total</label>
+                                <label class="cartBoxSelectedTotalPrice">$46.50</label>
                             </div>
+                            <div class="cartBoxSelectedHint">
+                                <img src="assets/images/icon-carbon-neutral.svg" alt="carbon neutral icon">
+                                <label>This is a <span>carbon-neutral</span> delivery</label>
+                            </div>
+                            <button class="cartBoxSelectedButton">Confirm Order</button>
                         </div>
                     </div>
-                    <div class="dessertsGridRow dessertsGridRow3">
-                        <div class="dessertsGridRow3Left dessertsGridItem">
-                            <img src="assets/images/image-cake-desktop.jpg" alt="image of waffles">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Cake</label>
-                                <h2>Red Velvet Cake</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">4.50</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dessertsGridRow3Middle dessertsGridItem">
-                            <img src="assets/images/image-brownie-desktop.jpg" alt="image of waffles">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Brownie</label>
-                                <h2>Salted Caramel Brownie</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">4.50</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dessertsGridRow3Right dessertsGridItem">
-                            <img src="assets/images/image-panna-cotta-desktop.jpg" alt="image of waffles">
-                            <div class="dessertContent">
-                                <div class="dessertButtonComponent"></div>
-                                <div class="dessertButtonSelectedComponent"></div>
-                                <label class="category">Panna Cotta</label>
-                                <h2>Vanilla Panna Cotta</h2>
-                                <div class="priceBox">
-                                    <label class="Currency">$</label>
-                                    <label class="price">6.50</label>
-                                </div>
-                            </div>
+                </section>
+            </main>
+            <footer class="attribution">
+                Challenge by <a href="https://www.frontendmentor.io&ref/challenge">Frontend Mentor</a>.
+                Coded by <a href="#">kephalosk</a>.
+            </footer>
+        </div>
+        <div class="windowConfirmation">
+            <section class="confirmation">
+                <div class="confirmationBox">
+                    <header>
+                        <img class="confirmationBoxHeaderImage" src="assets/images/icon-order-confirmed.svg" alt="confirmation icon">
+                        <h2>Order Confirmed</h2>
+                        <p>We hope you enjoy your food!</p>
+                    </header>
+                    <div class="confirmationList">
+                        <div class="confirmationListItems"></div>
+                        <div class="confirmationListTotal">
+                            <label class="confirmationListTotalName">Order Total</label>
+                            <label class="confirmationListTotalPrice">$46.50</label>
                         </div>
                     </div>
+                    <button class="confirmationButton">Start New Order</button>
                 </div>
             </section>
-            <section class="cart">
-                <div class="cartBox">
-                    <label class="cartBoxHeadline">Your Cart (<span class="itemsAmountTotal">0</span>)</label>
-                    <div class="cartBoxEmpty">
-                        <img class="cartBoxEmptyImage" src="assets/images/illustration-empty-cart.svg" alt="image of cake">
-                        <p>Your added items will appear here</p>
-                    </div>
-                    <div class="cartBoxSelected hidden">
-                        <div class="cartBoxSelectedList">
-                            <div class="cartBoxSelectedListItems"></div>
-                        </div>
-                        <div class="cartBoxSelectedTotal">
-                            <label class="cartBoxSelectedTotalName">Order Total</label>
-                            <label class="cartBoxSelectedTotalPrice">$46.50</label>
-                        </div>
-                        <div class="cartBoxSelectedHint">
-                            <img src="assets/images/icon-carbon-neutral.svg" alt="carbon neutral icon">
-                            <label>This is a <span>carbon-neutral</span> delivery</label>
-                        </div>
-                        <button class="cartBoxSelectedButton">Confirm Order</button>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <footer class="attribution">
-            Challenge by <a href="https://www.frontendmentor.io&ref/challenge">Frontend Mentor</a>.
-            Coded by <a href="#">kephalosk</a>.
-        </footer>
+        </div>
     </body>
 </html>
