@@ -38,11 +38,12 @@
                 width: 384px;
             }
 
-            .cartBox label{
+            .cartBoxHeadline{
                 color: hsl(14, 86%, 42%);
                 display: block;
                 font-size: 24px;
                 font-weight: bold;
+                margin-bottom: 24px;
                 margin-top: 4px;
             }
 
@@ -159,6 +160,121 @@
                 color: hsl(12, 20%, 44%);
                 color: hsl(14, 65%, 9%);
             }
+
+            .cartBoxSelectedButton {
+                background-color: hsl(14, 86%, 42%);
+                border: 0;
+                border-radius: 50px;
+                color: hsl(0, 0%, 100%);
+                cursor: pointer;
+                font-weight: 600;
+                margin-top: 24px;
+                padding: 12px;
+                width: 100%;
+            }
+
+            .cartBoxSelectedButton:hover {
+                background-color: hsl(14, 86%, 30%);
+            }
+
+            .cartBoxSelectedHint {
+                background-color: hsl(20, 50%, 98%);
+                border-radius: 8px;
+                color: hsl(12, 20%, 44%);
+                display: flex;
+                justify-content: center;
+                margin-top: 24px;
+                padding: 12px;
+            }
+
+            .cartBoxSelectedHint img {
+                margin-right: 8px;
+            }
+
+            .cartBoxSelectedHint label {
+                font-size: 14px;
+                margin-right: 8px;
+            }
+
+            .cartBoxSelectedHint span {
+                font-weight: 600;
+            }
+
+            .cartBoxSelectedListItem {
+                align-items: center;
+                display: flex;
+            }
+
+            .cartBoxSelectedListItemContent {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cartBoxSelectedListItemContent {
+                flex-grow: 1;
+            }
+
+            .cartBoxSelectedListItemContentName {
+                color: hsl(14, 65%, 9%);
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .cartBoxSelectedListItemContentQuantity {
+                color: hsl(12, 20%, 44%);
+                font-size: 14px;
+                margin-top: 5px;
+            }
+
+            .cartBoxSelectedListItemContentQuantityAmount {
+                color: hsl(14, 86%, 42%);
+                font-weight: 500;
+                margin-right: 12px;
+            }
+
+            .cartBoxSelectedListItemContentQuantitySum {
+                font-weight: 600;
+                margin-left: 8px;
+            }
+
+            .cartBoxSelectedListItemRemove {
+                border: 1px solid hsl(12, 20%, 44%);
+                border-radius: 50px;
+                color: hsl(12, 20%, 44%);
+                cursor: pointer;
+                padding: 0 5px;
+            }
+
+            .cartBoxSelectedListItemRemove:hover {
+                border: 1px solid hsl(14, 65%, 9%);
+                border-radius: 50px;
+                color: hsl(14, 65%, 9%);
+                padding: 0 5px;
+            }
+
+            .cartBoxSelectedTotal {
+                align-items: center;
+                color: hsl(14, 65%, 9%);
+                display: flex;
+                margin-top: 24px;
+            }
+
+            .cartBoxSelectedTotalName {
+                flex-grow: 1;
+                font-size: 14px;
+            }
+
+            .cartBoxSelectedTotalPrice {
+                font-size: 18px;
+                font-weight: 800;
+            }
+
+            hr {
+                background-color: hsl(13, 31%, 94%);
+                border: 0;
+                height: 1px;
+                margin: 14px 0;
+            }
         </style>
         <script>
             document.addEventListener('DOMContentLoaded', async () => {
@@ -181,47 +297,66 @@
                     });
 
                     function addItem() {
+                        const buttonLabel = dessertButtonSelected.querySelector('.dessertButtonSelectedLabel');
+                        buttonLabel.textContent = '1';
                         dessertButton.classList.add('hidden');
                         dessertButtonSelected.classList.remove('hidden');
+                        updateCart();
                     }
 
-                    addDessertButtonSelectedMinusEventListener(dessertButton, dessertButtonSelected)
+                    addDessertButtonSelectedMinusEventListener(dessertButton, dessertButtonSelected);
+                    addDessertButtonSelectedPlusEventListener(dessertButton, dessertButtonSelected);
                 })
             }
 
             function addDessertButtonSelectedMinusEventListener(dessertButton, dessertButtonSelected) {
-                console.log(dessertButton);
-                console.log(dessertButtonSelected);
-                // const iconMinus = dessertButtonSelected
+                const buttonMinus = dessertButtonSelected.querySelector('.dessertButtonSelectedIconMinus');
 
-                // const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
-                // console.log(dessertButtons)
-                // const dessertButtonSelectedIconMinus = document.querySelectorAll('.dessertButtonSelectedIconMinus');
-                // console.log(dessertButtonSelectedIconMinus);
-                // dessertButtonSelectedIconMinus.forEach(button => {
-                //     button.addEventListener('click', decrementItem);
-                //     button.addEventListener('keydown', (event) => {
-                //         if (event.key === 'Enter' || event.key === ' '){
-                //             decrementItem.call(this);
-                //         }
-                //     });
-                //
-                //
-                //     function decrementItem() {
-                //         const parentElement = this.parentElement;
-                //         const itemValue = parentElement.querySelector('.dessertButtonSelectedLabel');
-                //         console.log(itemValue.textContent);
-                //
-                //         // const dessertButton = this.firstElementChild;
-                //         // const dessertButtonSelected = parentElement.querySelector('.dessertButtonSelectedComponent');
-                //         // dessertButton.classList.add('hidden');
-                //         // dessertButtonSelected.classList.remove('hidden');
-                //     }
-                // })
+                buttonMinus.addEventListener('click', decrement);
+                buttonMinus.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' '){
+                        decrement.call(this);
+                    }
+                });
+
+                function decrement() {
+                    const buttonLabel = dessertButtonSelected.querySelector('.dessertButtonSelectedLabel');
+                    const labelValue = parseInt(buttonLabel.textContent, 10);
+
+                    if (labelValue <= 1){
+                        buttonLabel.textContent = '0';
+                        dessertButton.classList.remove('hidden');
+                        dessertButtonSelected.classList.add('hidden');
+                    } else {
+                        buttonLabel.textContent = labelValue - 1;
+                    }
+                    updateCart();
+                }
             }
 
-            function addDessertButtonSelectedPlusEventListener() {
+            function addDessertButtonSelectedPlusEventListener(dessertButton, dessertButtonSelected) {
+                const buttonPlus = dessertButtonSelected.querySelector('.dessertButtonSelectedIconPlus');
 
+                buttonPlus.addEventListener('click', increment);
+                buttonPlus.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' '){
+                        increment.call(this);
+                    }
+                });
+
+                function increment() {
+                    const buttonLabel = dessertButtonSelected.querySelector('.dessertButtonSelectedLabel');
+                    const currentValue = parseInt(buttonLabel.textContent, 10);
+
+                    buttonLabel.textContent = currentValue + 1;
+                    updateCart();
+                }
+            }
+
+            function updateCart() {
+                //TODO
+                //updateSum
+                //updateCardList
             }
 
             async function loadComponents() {
@@ -230,7 +365,7 @@
             }
 
             async function loadDessertButton() {
-                await fetch('dessertButtonComponent.html')
+                await fetch('dessertButtonComponent.html?' + new Date().getTime())
                     .then(response => response.text())
                     .then(data => {
                         const dessertButtons = document.querySelectorAll('.dessertButtonComponent');
@@ -241,11 +376,13 @@
             }
 
             async function loadDessertButtonSelected() {
-                await fetch('dessertButtonSelectedComponent.html')
+                console.log('fetchData');
+                await fetch('dessertButtonSelectedComponent.html?' + new Date().getTime())
                     .then(response => response.text())
                     .then(data => {
                         const dessertButtonsSelected = document.querySelectorAll('.dessertButtonSelectedComponent');
                         dessertButtonsSelected.forEach(button => {
+                            console.log(data);
                             button.innerHTML = data;
                             button.classList.add('hidden');
                         });
@@ -385,10 +522,51 @@
             </section>
             <section class="cart">
                 <div class="cartBox">
-                    <label>Your Cart (<span class="itemsAmountTotal">0</span>)</label>
-                    <div class="cartBoxEmpty">
-                        <img class="cartBoxEmptyImage" src="assets/images/illustration-empty-cart.svg" alt="image of cake">
-                        <p>Your added items will appear here</p>
+                    <label class="cartBoxHeadline">Your Cart (<span class="itemsAmountTotal">0</span>)</label>
+<!--                    <div class="cartBoxEmpty">-->
+<!--                        <img class="cartBoxEmptyImage" src="assets/images/illustration-empty-cart.svg" alt="image of cake">-->
+<!--                        <p>Your added items will appear here</p>-->
+<!--                    </div>-->
+                    <div class="cartBoxSelected">
+                        <div class="cartBoxSelectedList">
+                            <div class="cartBoxSelectedListItem">
+                                <div class="cartBoxSelectedListItemContent">
+                                    <label class="cartBoxSelectedListItemContentName">Classic Tiramisu</label>
+                                    <div class="cartBoxSelectedListItemContentQuantity">
+                                        <label class="cartBoxSelectedListItemContentQuantityAmount">1x</label>
+                                        <label class="cartBoxSelectedListItemContentQuantityPrice"><sub>@</sub> $5.50</label>
+                                        <label class="cartBoxSelectedListItemContentQuantitySum">$5.50</label>
+                                    </div>
+                                </div>
+                                <div class="cartBoxSelectedListItemRemove">
+                                    <svg class="cartBoxSelectedListItemRemoveIcon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="currentColor" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="cartBoxSelectedListItem">
+                                <div class="cartBoxSelectedListItemContent">
+                                    <label class="cartBoxSelectedListItemContentName">Classic Tiramisu</label>
+                                    <div class="cartBoxSelectedListItemContentQuantity">
+                                        <label class="cartBoxSelectedListItemContentQuantityAmount">1x</label>
+                                        <label class="cartBoxSelectedListItemContentQuantityPrice"><sub>@</sub> $5.50</label>
+                                        <label class="cartBoxSelectedListItemContentQuantitySum">$5.50</label>
+                                    </div>
+                                </div>
+                                <div class="cartBoxSelectedListItemRemove">
+                                    <svg class="cartBoxSelectedListItemRemoveIcon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="currentColor" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="cartBoxSelectedTotal">
+                            <label class="cartBoxSelectedTotalName">Order Total</label>
+                            <label class="cartBoxSelectedTotalPrice">$46.50</label>
+                        </div>
+                        <div class="cartBoxSelectedHint">
+                            <img src="assets/images/icon-carbon-neutral.svg" alt="carbon neutral icon">
+                            <label>This is a <span>carbon-neutral</span> delivery</label>
+                        </div>
+                        <button class="cartBoxSelectedButton">Confirm Order</button>
                     </div>
                 </div>
             </section>
