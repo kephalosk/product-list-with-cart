@@ -31,11 +31,13 @@ function addItem(dessertButton, dessertButtonSelected) {
 function addDessertButtonSelectedMinusEventListener(dessertButton, dessertButtonSelected) {
     const buttonMinus = dessertButtonSelected.querySelector('.dessertButtonSelectedIconMinus');
 
-    buttonMinus.addEventListener('click', decrement);
+    buttonMinus.addEventListener('click', () => {
+        decrement(dessertButton, dessertButtonSelected);
+    });
 
     buttonMinus.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' '){
-            decrement.call(this);
+            decrement(dessertButton, dessertButtonSelected);
         }
     });
 }
@@ -57,11 +59,13 @@ function decrement(dessertButton, dessertButtonSelected) {
 function addDessertButtonSelectedPlusEventListener(dessertButton, dessertButtonSelected) {
     const buttonPlus = dessertButtonSelected.querySelector('.dessertButtonSelectedIconPlus');
 
-    buttonPlus.addEventListener('click', increment);
+    buttonPlus.addEventListener('click', () => {
+        increment(dessertButton, dessertButtonSelected);
+    });
 
     buttonPlus.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' '){
-            increment.call(this);
+            increment(dessertButton, dessertButtonSelected);
         }
     });
 }
