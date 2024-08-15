@@ -6,6 +6,7 @@
 .cartBoxSelectedListItemContent {
     display: flex;
     flex-direction: column;
+    font-size: 13px;
 }
 
 .cartBoxSelectedListItemContent {
@@ -18,13 +19,22 @@
     font-weight: 600;
 }
 
+.cartBoxSelectedListItemContentQuantity {
+    margin-top: 8px;
+}
+
 .cartBoxSelectedListItemContentQuantityAmount {
     color: hsl(14, 86%, 42%);
     font-weight: 500;
     margin-right: 12px;
 }
 
+.cartBoxSelectedListItemContentQuantityPrice {
+    color: hsl(12, 20%, 44%);
+}
+
 .cartBoxSelectedListItemContentQuantitySum {
+    color: hsl(12, 20%, 44%);
     font-weight: 600;
     margin-left: 8px;
 }

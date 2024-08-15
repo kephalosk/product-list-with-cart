@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="components/dessertButtonSelectedComponent.css">
         <link rel="stylesheet" href="components/dessertButtonComponent.css">
         <link rel="stylesheet" href="components/cartBoxSelectedListItemComponent.css">
+        <link rel="stylesheet" href="components/dessertsGridItemComponent.css">
+        <link rel="stylesheet" href="components/confirmationListItemComponent.css">
         <title>kephalosk | Product List With Chart</title>
         <style>
             @font-face {
@@ -211,7 +213,7 @@
 
             .dessertsGrid {
                 display: grid;
-                grid-template-rows: 1fr 1fr 1fr;
+                grid-template-columns: repeat(auto-fill, 250px);
             }
 
             .dessertsGridItemComponent section{
@@ -219,18 +221,13 @@
                 flex-direction: column;
                 max-width: 250px;
                 padding: 12px;
-            }
-
-            .dessertsGridRow {
-                display: grid;
-                grid-template-columns: auto auto auto;
-                height: 100%;
-                max-width: 822px;
+                width: 100%;
             }
 
             .dessertsGridRow img{
                 border-radius: 10px;
                 max-width: 250px;
+                width: 100%;
             }
 
             .hidden {
@@ -244,6 +241,11 @@
                 height: 100%;
                 position: absolute;
                 width: 100%;
+            }
+
+            .windowConfirmation.hidden {
+                display: none;
+                position: unset;
             }
 
             .windowPadding {
@@ -283,7 +285,7 @@
 
             main {
                 display: grid;
-                grid-template-columns: auto auto;
+                grid-template-columns: auto 384px;
                 width: 100%;
             }
 
@@ -302,21 +304,15 @@
                 <section class="desserts">
                     <h1>Desserts</h1>
                     <div class="dessertsGrid">
-                        <div class="dessertsGridRow dessertsGridRow1">
-                            <div class="dessertsGridItemComponent"></div>
-                            <div class="dessertsGridItemComponent"></div>
-                            <div class="dessertsGridItemComponent"></div>
-                        </div>
-                        <div class="dessertsGridRow dessertsGridRow2">
-                            <div class="dessertsGridItemComponent"></div>
-                            <div class="dessertsGridItemComponent"></div>
-                            <div class="dessertsGridItemComponent"></div>
-                        </div>
-                        <div class="dessertsGridRow dessertsGridRow3">
-                            <div class="dessertsGridItemComponent"></div>
-                            <div class="dessertsGridItemComponent"></div>
-                            <div class="dessertsGridItemComponent"></div>
-                        </div>
+                        <div class="dessertsGridItemComponent"></div>
+                        <div class="dessertsGridItemComponent"></div>
+                        <div class="dessertsGridItemComponent"></div>
+                        <div class="dessertsGridItemComponent"></div>
+                        <div class="dessertsGridItemComponent"></div>
+                        <div class="dessertsGridItemComponent"></div>
+                        <div class="dessertsGridItemComponent"></div>
+                        <div class="dessertsGridItemComponent"></div>
+                        <div class="dessertsGridItemComponent"></div>
                     </div>
                 </section>
                 <section class="cart">
@@ -348,9 +344,9 @@
                 Coded by <a href="#">kephalosk</a>.
             </footer>
         </div>
-        <div class="windowConfirmation">
-            <section class="confirmation">
-                <div class="confirmationBox">
+        <div class="windowConfirmation hidden">
+            <section class="confirmation hidden">
+                <div class="confirmationBox hiddenVisibility">
                     <header>
                         <img class="confirmationBoxHeaderImage" src="assets/images/icon-order-confirmed.svg" alt="confirmation icon">
                         <h2>Order Confirmed</h2>
