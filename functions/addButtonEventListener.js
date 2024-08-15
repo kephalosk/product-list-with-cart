@@ -144,6 +144,8 @@ function confirmOrder() {
 
     windowConfirmation.classList.remove('hidden');
     confirmation.classList.remove('hidden');
+
+    window.scrollTo(0, 0);
 }
 
 function updateConfirmationList() {

@@ -39,6 +39,10 @@
                 border-radius: 10px;
                 padding: 24px;
                 width: 384px;
+
+                @media (max-width: 750px) {
+                    width: 100%;
+                }
             }
 
             .cartBoxHeadline{
@@ -149,6 +153,10 @@
                 padding: 40px;
                 top: 50%;
                 width: 510px;
+
+                @media (max-width: 600px) {
+                    margin-top: 500px;
+                }
             }
 
             .confirmationBoxHeaderImage {
@@ -214,6 +222,20 @@
             .dessertsGrid {
                 display: grid;
                 grid-template-columns: repeat(auto-fill, 250px);
+
+                @media (max-width: 600px) {
+                    grid-template-columns: 1fr;
+                    justify-content: center;
+                    width: 100%;
+                }
+            }
+
+            dessertsGridItemComponent {
+                align-items: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
             }
 
             .dessertsGridItemComponent section{
@@ -287,6 +309,10 @@
                 display: grid;
                 grid-template-columns: auto 384px;
                 width: 100%;
+
+                @media (max-width: 750px) {
+                    grid-template-columns: auto;
+                }
             }
 
             hr {

@@ -9,6 +9,12 @@
     position: relative;
 }
 
+.dessertsGridItemComponentContainer {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
+
 .priceBox {
     color: hsl(14, 86%, 42%);
     font-weight: bold;
